@@ -1,87 +1,4 @@
-# import cv2
-# import numpy as np
-# import mediapipe as mp
-# import math
-
-# # -----------------------------
-# # Distance function
-# # -----------------------------
-# def distance(p1, p2):
-#     return math.sqrt((p1.x - p2.x)**2 + (p1.y - p2.y)**2)
-
-# # -----------------------------
-# # Heart drawing function (dynamic)
-# # -----------------------------
-# def draw_heart(img, x, y):
-#     pts = [
-#         (x, y + 20),
-#         (x - 30, y - 10),
-#         (x - 50, y - 40),
-#         (x - 30, y - 60),
-#         (x, y - 40),
-#         (x + 30, y - 60),
-#         (x + 50, y - 40),
-#         (x + 30, y - 10)
-#     ]
-
-#     pts = np.array(pts, np.int32)
-#     cv2.fillPoly(img, [pts], (0, 0, 255))
-
-
-# # -----------------------------
-# # Camera setup
-# # -----------------------------
-# cap = cv2.VideoCapture(0)
-
-# mp_hands = mp.solutions.hands
-# hands = mp_hands.Hands(
-#     min_detection_confidence=0.7,
-#     min_tracking_confidence=0.7
-# )
-# mp_draw = mp.solutions.drawing_utils
-
-# # -----------------------------
-# # Main loop
-# # -----------------------------
-# while True:
-#     success, img = cap.read()
-#     img = cv2.flip(img, 1)
-#     h, w, _ = img.shape
-
-#     rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-#     result = hands.process(rgb)
-
-#     if result.multi_hand_landmarks:
-#         for hand in result.multi_hand_landmarks:
-#             mp_draw.draw_landmarks(img, hand, mp_hands.HAND_CONNECTIONS)
-
-#             landmarks = hand.landmark
-
-#             # Thumb & Index tip
-#             thumb = landmarks[4]
-#             index = landmarks[8]
-
-#             d = distance(thumb, index)
-
-#             # Screen coordinates
-#             cx = int((thumb.x + index.x) / 2 * w)
-#             cy = int((thumb.y + index.y) / 2 * h)
-
-#             # Gesture detect
-#             if d < 0.05:
-#                 draw_heart(img, cx, cy)
-
-#     cv2.imshow("Gesture Controlled Heart ❤️", img)
-
-#     if cv2.waitKey(1) == 27:
-#         break
-
-# cap.release()
-# cv2.destroyAllWindows()
-
-
-
-# project name  is : Gesture Controlled Smart Widget System
+ # Gesture Controlled Smart Widget System
 
 import cv2
 import mediapipe as mp
@@ -276,4 +193,5 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
+
 
