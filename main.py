@@ -5,15 +5,11 @@ import mediapipe as mp
 import math
 import pyautogui
 
-# =============================
 # Utils
-# =============================
 def distance(p1, p2):
     return math.sqrt((p1.x - p2.x)**2 + (p1.y - p2.y)**2)
 
-# =============================
 # Setup
-# =============================
 cap = cv2.VideoCapture(0)
 
 mp_hands = mp.solutions.hands
@@ -26,9 +22,7 @@ cooldown = 0
 menu_hold_time = 0
 exit_hold_time = 0
 
-# =============================
 # UI Buttons
-# =============================
 menu_buttons = [
     {"text": "PRESENTATION", "x": 50, "y": 80},
     {"text": "MEDIA", "x": 50, "y": 180},
@@ -44,10 +38,8 @@ def draw_menu(img, hover):
         cv2.putText(img, b["text"], (b["x"]+20, b["y"]+45),
                     cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
 
-# =============================
 # Main loop
-# =============================
-while True:
+ while True:
     success, img = cap.read()
     if not success:
         continue
@@ -75,9 +67,7 @@ while True:
             thumb_index = distance(index, thumb)
             index_middle = distance(index, middle)
 
-            # =============================
             # MENU MODE
-            # =============================
             if mode == "MENU":
                 for b in menu_buttons:
                     if b["x"] < cx < b["x"]+350 and b["y"] < cy < b["y"]+70:
@@ -100,9 +90,7 @@ while True:
                         else:
                             exit_hold_time = 0
 
-            # =============================
             # PRESENTATION MODE
-            # =============================
             elif mode == "PRESENTATION":
                 cv2.putText(img, "PRESENTATION MODE",
                             (50,50), cv2.FONT_HERSHEY_SIMPLEX, 1,
@@ -123,9 +111,7 @@ while True:
                 else:
                     menu_hold_time = 0
 
-            # =============================
             # MEDIA MODE
-            # =============================
             elif mode == "MEDIA":
                 cv2.putText(img, "MEDIA MODE",
                             (50,50), cv2.FONT_HERSHEY_SIMPLEX, 1,
@@ -158,9 +144,7 @@ while True:
                 else:
                     menu_hold_time = 0
 
-            # =============================
             # DASHBOARD MODE
-            # =============================
             elif mode == "DASHBOARD":
                 cv2.putText(img, "DASHBOARD MODE",
                             (50,50), cv2.FONT_HERSHEY_SIMPLEX, 1,
